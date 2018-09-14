@@ -10,21 +10,12 @@
 
 class person final{
 public:
-	person() {
-		name = nullptr; 
-		age = 0; 
-	};
-	const char* get_name() const {
-		return this->name;
-	}
-	int get_age() const {
-		return this->age;
-	}
+	person();
+	const char* get_name() const;
+	int get_age() const;
 	person(const person & p);
 	person& set(const char* pname, int age);
-	~person() { 
-		delete[] name;
-	}
+	~person();
 	person& operator = (const person& that);
 private:
 	char* name;

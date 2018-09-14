@@ -4,12 +4,12 @@
 #include <utility>
 #include <iostream>
 
-template <class RandomAccessIterator, class Compare>
-void select_sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp){
-	RandomAccessIterator maxit;
-	for (RandomAccessIterator curfirst = first; curfirst != last; ++curfirst) {
+template <class ForwardIterator, class Compare>
+void select_sort(ForwardIterator first, ForwardIterator last, Compare comp){
+	ForwardIterator maxit;
+	for (ForwardIterator curfirst = first; curfirst != last; ++curfirst) {
 		maxit = curfirst;
-		for (RandomAccessIterator cur = curfirst; cur != last; ++cur) {
+		for (ForwardIterator cur = curfirst; cur != last; ++cur) {
 			if (comp(*cur, *maxit) == true) {
 				maxit = cur;
 			}

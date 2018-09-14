@@ -2,25 +2,26 @@
 
 
 person& person::operator = (const person& that) {
-	char* local_name = new char[strlen(that.name) + 1];
-	std::copy(that.name, that.name + strlen(that.name) + 1, local_name);
-	delete[] name;
-	name = local_name;
-	age = that.age;
-	return *this;
+	if (&that != this) {
+		delete[] name;
+		char* name = new char[strlen(that.name) + 1];
+		std::copy(that.name, that.name + strlen(that.name) + 1, name);
+		age = that.age;
+		return *this;
+	}
+	else {
+		return *this;
+	}
 }
 
 person::person(const person & p) {
-	const int temp = std::strlen(p.name);
 	this->name = new char [std::strlen(p.name) + 1];
 	std::copy(p.name, p.name + std::strlen(p.name) + 1, this->name);
 	this->age = p.age;
 }
 
 person& person::set(const char* pname, int age) {
-	if (name != nullptr) {
-		delete[] this->name;
-	}
+	delete[] this->name;
 	name = new char[strlen(pname) + 1];
 	std::copy(pname, pname + std::strlen(pname) + 1, name); 
 	this->age = age;
@@ -33,4 +34,21 @@ std::ostream & operator <<(std::ostream & os, const person & p) {
 	}
 	os << ' ' << p.get_age() << ';';
 	return os;
+}
+
+person::person() {
+	name = nullptr;
+	age = 0;
+};
+
+const char* person::get_name() const {
+	return this->name;
+}
+
+int person::get_age() const {
+	return this->age;
+}
+
+person::~person() {
+	delete[] name;
 }
